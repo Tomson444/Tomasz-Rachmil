@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografia Europy - Quiz</title>
+    <style>
+          h2 {
+            text-align: center;
+        }
+        .nazwaklasy {
+            background-color: red;
+            color: blue;
+        }
+        canvas {
+            background-color: white;
+            border: 2px dotted black;
+        }
+        input {
+            font-size: 25px;
+        }
+        input:focus {
+            background-color: aqua;
+        }
+        main, article {
+            margin-bottom: 25px; 
+        }
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: white;
+            width: 100%;
+            padding: 10px 0;
+        }
+        </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <script>
+
+        let can, cont, intervalId;
+        window.onload=function(){
+            can=document.querySelector("canvas");
+            rysujZegarAnalogowy
+        }
+        
+        function rysujLinie() {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+            cont.beginPath();
+            cont.strokeStyle="red";
+            cont.lineWidth=3;
+            cont.lineCap="round"; // square,butt
+            cont.moveTo(10,10);
+            cont.lineTo(can.width-10,can.height-10);
+            cont.stroke();
+        
+            cont.beginPath();
+            cont.lineWidth=2;
+            cont.strokeStyle="green";
+            cont.moveTo(20,10);
+            cont.lineTo(can.width-10,can.height-20);
+            cont.stroke();
+            
+        }
+        
+        function rysujKrzywa() {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+            cont.beginPath()
+            let x=150,y=150,r=100,katStart=0.1*Math.PI,katStop=0.9*Math.PI;
+            cont.strokeStyle="#440088";
+            cont.lineWidth=5;
+            cont.arc(x,y,r,katStart,katStop,true)//łuk true i false strony zegara
+            cont.stroke();
+        
+            
+            cont.lineWidth = 6;
+            cont.strokeStyle = "#333";
+            cont.beginPath();
+            cont.moveTo(67, 62);
+            cont.bezierCurveTo(164, 397, 329, 7, 444, 358);
+            cont.stroke();
+        }
+        
+        function rysujFigury() {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+        
+            let dlugoscPodstawy=150, dlugoscRamion=100;
+            let h=Math.sqrt(Math.pow(dlugoscRamion,2) - Math.pow(dlugoscPodstawy/2,2))
+            cont.beginPath();
+            cont.moveTo(can.width/2-dlugoscPodstawy/2, can.height/2); //A
+            cont.lineTo(can.width/2+dlugoscPodstawy/2, can.height/2); //B
+            cont.lineTo(can.width/2, can.height/2 - h /* tu - bo początek lini jest w lewym górny rogu*/ ) //C od B
+            //cont.lineTo(can.width/2-dlugoscPodstawy/2, can.height/2); //A od C
+            //lub
+            cont.closePath();  //lepsze
+        
+        //wypełnienie
+        cont.fillStyle="black";
+        cont.fill();
+        //kontury
+        cont.lineWidth=10;
+        cont.strokeStyle="red"
+        //zaokrąglenie
+        cont.lineJoin="round";//mitre,level
+        cont.stroke();
+        
+        
+        //prostokąt
+        cont.fillStyle="rgba(95,50,90,0.5)" // rgba - przeźroczyste , rgb - normalne
+        cont.fillRect(150,50,100,80)
+        
+        cont.strokeStyle="rgb(150,190,50)"
+        cont.strokeRect(150,50,100,80)
+        
+        //okrąg
+        cont.beginPath();
+        cont.globalAlpha=0.4;
+        cont.arc(170,150,40,0,2*Math.PI);
+        cont.strokeStyle="rgb(200,0,200)"
+        cont.fillStyle="blue"
+        cont.fill();
+        cont.stroke();
+        cont.globalAlpha=1;
+        
+        }
+        
+        function rysujText() {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+        cont.font="20px Arial";
+        cont.textAlign="left";
+        cont.fillText("Tekst wyrównany do lewej", can.width/2,50);
+        
+        cont.lineWidth=2;
+        cont.strokeStyle="red";
+        cont.textAlign="center";
+        cont.strokeText("Tekst wyśrodkowant", can.width/2,150)
+        }
+        
+        function rysujStarryNight() {
+    if (cont == null) {
+        cont = can.getContext("2d");
+    }
+    czysc(); // Wyczyść canvas przed narysowaniem obrazu
+
+    // Tło nieba
+    cont.fillStyle = '#001d3d';
+    cont.fillRect(0, 0, can.width, can.height);
+
+    // Gwiazdy
+    function drawStar(cx, cy, spikes, outerRadius, innerRadius) {
+        let rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        let step = Math.PI / spikes;
+
+        cont.beginPath();
+        cont.moveTo(cx, cy - outerRadius)
+        for (let i = 0; i < spikes; i++) {
+            x = cx + Math.cos(rot) * outerRadius;
+            y = cy + Math.sin(rot) * outerRadius;
+            cont.lineTo(x, y)
+            rot += step
+
+            x = cx + Math.cos(rot) * innerRadius;
+            y = cy + Math.sin(rot) * innerRadius;
+            cont.lineTo(x, y)
+            rot += step
+        }
+        cont.lineTo(cx, cy - outerRadius)
+        cont.closePath();
+        cont.fillStyle = '#ffd700';
+        cont.fill();
+    }
+
+    for (let i = 0; i < 10; i++) {
+        drawStar(Math.random() * can.width, Math.random() * can.height, 5, 15, 7);
+    }
+
+    // Księżyc
+    cont.beginPath();
+    cont.arc(650, 100, 50, 0, 2 * Math.PI);
+    cont.fillStyle = '#ffcc00';
+    cont.fill();
+
+    // Wzgórza
+    cont.beginPath();
+    cont.moveTo(0, 400);
+    cont.quadraticCurveTo(200, 250, 400, 400);
+    cont.quadraticCurveTo(600, 550, 800, 400);
+    cont.lineTo(800, 500);
+    cont.lineTo(0, 500);
+    cont.closePath();
+    cont.fillStyle = '#013220';
+    cont.fill();
+
+    // Drzewo
+    cont.beginPath();
+    cont.moveTo(100, 500);
+    cont.lineTo(140, 300);
+    cont.lineTo(180, 500);
+    cont.closePath();
+    cont.fillStyle = '#654321';
+    cont.fill();
+
+    // Wieża
+    cont.beginPath();
+    cont.moveTo(500, 400);
+    cont.lineTo(520, 300);
+    cont.lineTo(540, 400);
+    cont.closePath();
+    cont.fillStyle = '#8B4513';
+    cont.fill();
+}
+        function transformaty() {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+        //cont.rect(0,0,30,30);
+        //cont.rect(50,50,30,30);
+        //cont.rect(100,100,30,30);
+        //cont.stroke();
+        cont.beginPath();
+        cont.save();
+        cont.rect(0,0,30,30);
+        cont.translate(50,50);
+        cont.rect(0,0,30,30);
+        cont.translate(50,50);
+        cont.rect(0,0,30,30);
+        cont.stroke();
+        cont.restore();
+        }
+        
+        function obrot(liczba) {
+            if (cont==null) {
+                cont=can.getContext("2d");
+            }
+            cont.save();
+            cont.translate(can.width/2, can.height/2);
+            cont.beginPath();
+            let kat0=(liczba>1)? 2*Math.PI/liczba :0;
+            
+        
+        for (let i = 0; i < liczba; i++) {
+            cont.rotate(kat0)
+            cont.rect(0,0,60,60);
+        }
+        cont.stroke();
+        cont.restore();
+        }
+        
+        function czysc(){clearInterval(intervalId), cont.clearRect(0,0,can.width,can.height);}
+    
+// Funkcja rozpoczynająca odświeżanie zegara co sekundę
+function startZegar() {
+    intervalId = setInterval(rysujZegarAnalogowy, 1000);
+}
+
+// Funkcja zatrzymująca odświeżanie zegara
+function stopZegar() {
+    clearInterval(intervalId);
+}
+
+// Funkcja rysująca zegar analogowy
+function rysujZegarAnalogowy() {
+    if (cont == null) {
+        cont = can.getContext("2d");
+    }
+
+    cont.clearRect(0, 0, can.width, can.height);
+
+    let teraz = new Date();
+    let godzina = teraz.getHours();
+    let minuta = teraz.getMinutes();
+    let sekunda = teraz.getSeconds();
+
+    // Rysowanie tarczy zegara
+    cont.beginPath();
+    cont.arc(can.width / 2, can.height / 2, 200, 0, 2 * Math.PI);
+    cont.strokeStyle = "black";
+    cont.lineWidth = 5;
+    cont.stroke();
+
+    // Rysowanie wskazówki godzinowej
+    cont.beginPath();
+    let katGodziny = (godzina % 12 + minuta / 60) * (Math.PI / 6) - Math.PI / 2;
+    let dlugoscGodziny = 100;
+    let koniecXGodziny = can.width / 2 + dlugoscGodziny * Math.cos(katGodziny);
+    let koniecYGodziny = can.height / 2 + dlugoscGodziny * Math.sin(katGodziny);
+    cont.moveTo(can.width / 2, can.height / 2);
+    cont.lineTo(koniecXGodziny, koniecYGodziny);
+    cont.strokeStyle = "black";
+    cont.lineWidth = 10;
+    cont.stroke();
+
+    // Rysowanie wskazówki minutowej
+    cont.beginPath();
+    let katMinuty = (minuta + sekunda / 60) * (Math.PI / 30) - Math.PI / 2;
+    let dlugoscMinuty = 150;
+    let koniecXMinuty = can.width / 2 + dlugoscMinuty * Math.cos(katMinuty);
+    let koniecYMinuty = can.height / 2 + dlugoscMinuty * Math.sin(katMinuty);
+    cont.moveTo(can.width / 2, can.height / 2);
+    cont.lineTo(koniecXMinuty, koniecYMinuty);
+    cont.strokeStyle = "blue";
+    cont.lineWidth = 7;
+    cont.stroke();
+
+    // Rysowanie wskazówki sekundowej
+    cont.beginPath();
+    let katSekundy = sekunda * (Math.PI / 30) - Math.PI / 2;
+    let dlugoscSekundy = 170;
+    let koniecXSekundy = can.width / 2 + dlugoscSekundy * Math.cos(katSekundy);
+    let koniecYSekundy = can.height / 2 + dlugoscSekundy * Math.sin(katSekundy);
+    cont.moveTo(can.width / 2, can.height / 2);
+    cont.lineTo(koniecXSekundy, koniecYSekundy);
+    cont.strokeStyle = "red";
+    cont.lineWidth = 3;
+    cont.stroke();
+
+    // Rysowanie punktu centralnego
+    cont.beginPath();
+    cont.arc(can.width / 2, can.height / 2, 5, 0, 2 * Math.PI);
+    cont.fillStyle = "black";
+    cont.fill();
+
+}
+
+
+function rysujWykresPrzelicznika() {
+    let dane = generujLosoweDane();
+    rysujWykres(dane);
+}
+
+function generujLosoweDane() {
+    let dane = [];
+    for (let i = 0; i < 10; i++) {
+        dane.push(Math.floor(Math.random() * 100)); 
+    }
+    return dane;
+}
+
+function rysujWykres(dane) {
+    if (cont == null) {
+        cont = can.getContext("2d");
+    }
+    let krokX = can.width / dane.length;
+    let maxValue = Math.max(...dane);
+    cont.clearRect(0, 0, can.width, can.height);
+    cont.beginPath();
+    cont.moveTo(0, can.height - dane[0]);
+    for (let i = 1; i < dane.length; i++) {
+        cont.lineTo(i * krokX, can.height - (dane[i] * can.height / maxValue));
+    }
+    cont.stroke();
+}
+
+        let playerX = 400; 
+        let playerY = 450;
+        let bulletX = playerX; 
+        let bulletY = playerY;
+        let bulletSpeed = 5; 
+        let isShooting = false; 
+        let asteroidX = Math.random() * 800; 
+        let asteroidY = 0;
+        let asteroidSpeed = 2; 
+
+        window.onload = function() {
+            can = document.querySelector("canvas");
+            cont = can.getContext("2d");
+            document.addEventListener("keydown", movePlayer);
+        }
+
+        function startGame() {
+            intervalId = setInterval(update, 20); 
+        }
+
+        function stopGame() {
+            clearInterval(intervalId); 
+            clearCanvas(); 
+        }
+
+        function update() {
+            clearCanvas();
+            moveBullet();
+            drawPlayer();
+            if (isShooting) drawBullet();
+            moveAsteroid();
+            drawAsteroid();
+            checkCollision();
+        }
+
+        function movePlayer(e) {
+            if (e.key === "ArrowLeft" && playerX > 0) {
+                playerX -= 10;
+            } else if (e.key === "ArrowRight" && playerX < 750) {
+                playerX += 10;
+            } else if (e.key === " ") { 
+                isShooting = true;
+                bulletX = playerX + 25; 
+                bulletY = playerY;
+            }
+        }
+
+        function drawPlayer() {
+            cont.fillStyle = "blue";
+            cont.fillRect(playerX, playerY, 50, 50);
+        }
+
+        function drawBullet() {
+            cont.fillStyle = "red";
+            cont.fillRect(bulletX, bulletY, 5, 10);
+        }
+
+        function moveBullet() {
+            if (isShooting && bulletY > 0) {
+                bulletY -= bulletSpeed;
+            } else {
+                isShooting = false;
+            }
+        }
+
+        function moveAsteroid() {
+            asteroidY += asteroidSpeed;
+            if (asteroidY > 500) {
+                asteroidX = Math.random() * 800;
+                asteroidY = 0;
+            }
+        }
+
+        function drawAsteroid() {
+            cont.fillStyle = "gray";
+            cont.beginPath();
+            cont.arc(asteroidX, asteroidY, 20, 0, Math.PI * 2);
+            cont.fill();
+        }
+
+        function checkCollision() {
+            let distance = Math.sqrt(Math.pow(playerX - asteroidX, 2) + Math.pow(playerY - asteroidY, 2));
+            if (distance < 35) { 
+                alert("Game Over!");
+                stopGame(); 
+            }
+            if (isShooting) {
+                distance = Math.sqrt(Math.pow(bulletX - asteroidX, 2) + Math.pow(bulletY - asteroidY, 2));
+                if (distance < 25) { 
+                    asteroidX = Math.random() * 800;
+                    asteroidY = 0;
+                    isShooting = false;
+                }
+            }
+        }
+
+        function clearCanvas() {
+            cont.clearRect(0, 0, can.width, can.height);
+        }
+        </script>
+</head>
+<body>
+    <header>
+        <h1>Geografia Europy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="about.html">Teren</a></li>
+                <li><a href="countries.html">Kraje</a></li>
+                <li><a href="maps.html">Mapa</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="gallery.html">Galeria</a></li>
+                <li><a href="resources.html">Surowce</a></li>
+                <li><a href="news.html">Widadomości</a></li>
+                <li><a href="events.html">Wydarzenia</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Quiz</h2>
+        <article id="quiz-container">
+                <div id="buttons">
+            <input type="button" value="Rysuj linie" onclick="rysujLinie()">
+            <input type="button" value="Rysuj krzywą" onclick="rysujKrzywa()">
+            <input type="button" value="Rysuj figurę" onclick="rysujFigury()">
+            <input type="button" value="Rysuj tekst" onclick="rysujText()">
+            <input type="button" value="van Gogh - Starry Night" onclick="rysujStarryNight()">
+            <input type="button" value="transformaty" onclick="transformaty()">
+            <input type="button" value="zegar" onclick="rysujZegarAnalogowy()">
+            <input type="button" value="zegar - start" onclick="startZegar()">
+            <input type="button" value="zegar - stop" onclick="stopZegar()">
+            <input type="button" value="wykres do przelicznika" onclick="rysujWykresPrzelicznika()">
+            <input type="button" value="Gra start" onclick="startGame()">
+            <input type="button" value="Gra stop" onclick="stopGame()">
+            <input type="button" value="czyść" onclick="czysc()">
+            <br>
+            liczba: <input type="number" value="1" step="1" id="liczba">
+            <input type="button" value="Obrót" onclick="obrot(liczba.value)">
+            </div>
+            
+    
+            <canvas id="canvas" width="800" height="500"></canvas>
+            
+            </article>
+    </main>
+    <footer>
+        <p>Projekt strony internetowej wykonany w ramach zaliczenia przedmiotu MO: TIiSKwE na kierunku Energetyka. [Tomasz Rachmil]</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+    <script src="js/global.js"></script>
+</body>
+</html>

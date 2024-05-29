@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografia Europy - Galeria</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<script>
+    
+</script>
+<body>
+    <header>
+        <h1>Geografia Europy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="about.html">Teren</a></li>
+                <li><a href="countries.html">Kraje</a></li>
+                <li><a href="maps.html">Mapa</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="gallery.html">Galeria</a></li>
+                <li><a href="resources.html">Surowce</a></li>
+                <li><a href="news.html">Widadomości</a></li>
+                <li><a href="events.html">Wydarzenia</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+               
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Wybierz kategorię</h2>
+        <div class="tabs">
+            <button id="rivers-tab" class="category-btn" onclick="showCategory('rivers')">Rzeki</button>
+            <button id="mountains-tab" class="category-btn" onclick="showCategory('mountains')">Góry</button>
+            <button id="plains-tab" class="category-btn" onclick="showCategory('plains')">Niziny</button>
+            <button id="lakes-tab" class="category-btn" onclick="showCategory('lakes')">Jeziora</button>
+            <button id="beaches-tab" class="category-btn" onclick="showCategory('beaches')">Plaże/Morze</button>
+        </div>
+        <br>
+        <div id="rivers" class="gallery">
+            <div class="image-container">
+                <img src="https://geografia.gozych.edu.pl/wp-content/uploads/2020/02/mazowiecka_1-1024x683.png" alt="Rzeka 1" id="a1" >
+            </div>
+            <div class="image-container">
+                <img src="https://geografia.gozych.edu.pl/wp-content/uploads/2020/02/wisla_1.png" alt="Rzeka 2" id="a2">
+            </div>
+            <div class="image-container">
+                <img src="https://www.tapeciarnia.pl/tapety/normalne/tapeta-potok-nieznany-w-gorach-kolymskich-jesienia.jpg" alt="Rzeka 3" id="a3">
+            </div>
+            <div class="image-container">
+                <img src="https://www.portalgorski.pl/images/content/2016/09/potoki_2_d.jpg" alt="Rzeka 4" id="a4">
+            </div>
+            <div class="image-container">
+                <img src="https://wodnesprawy.pl/wp-content/uploads/2024/03/Wodne-Sprawy-6_2024-28.jpg" alt="Rzeka 5" id="a5">
+            </div>
+        </div>
+
+        <div id="mountains" class="gallery">
+            <div class="image-container">
+                <img src="https://szukajacslonca.com/wp-content/uploads/2017/08/hg-kwiatki.jpg?w=1920&h=768&crop=1" alt="Gora 1" id="b1">
+            </div>
+            <div class="image-container">
+                <img src="https://backend.triverna.pl/blog/wp-content/uploads/2024/04/Piekne-Alpy-Szwajcarskie.jpeg" alt="Gora 2" id="b2">
+            </div>
+            <div class="image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Els_Encantats.JPG" alt="Gora 3" id="b3">
+            </div>
+            <div class="image-container">
+                <img src="https://www.apetytnaswiat.pl/2017/wp-content/uploads/2019/02/Apetyt-na-Szkocj%C4%99-Munros-09.jpg" alt="Gora 4" id="b4">
+            </div>
+            <div class="image-container">
+                <img src="https://www.karolnienartowicz.com/wp-content/uploads/2019/02/Norwegia-fiordy-12.jpg" alt="Gora 5" id="b5">
+            </div>
+        </div>
+
+        <div id="plains" class="gallery">
+            <div class="image-container">
+                <img src="https://assets.puzzlefactory.pl/puzzle/227/429/original.jpg" alt="Nizina 1" id="c1">
+            </div>
+            <div class="image-container">
+                <img src="https://geografia.gozych.edu.pl/wp-content/uploads/2020/02/niziziny_img.png" alt="Nizina 2" id="c2">
+            </div>
+            <div class="image-container">
+                <img src="https://regiony-projekt.gozych.edu.pl/img/mazowsze1.jpg" alt="Nizina 3" id="c3">
+            </div>
+            <div class="image-container">
+                <img src="https://regiony-projekt.gozych.edu.pl/img/podlasie.jpg" alt="Nizina 4" id="c4">
+            </div>
+            <div class="image-container">
+                <img src="https://bartmika.com/wp-content/uploads/2021/02/DSC0435.jpg" alt="Nizina 5" id="c5">
+            </div>
+        </div>
+
+        <div id="lakes" class="gallery">
+            <div class="image-container">
+                <img src="https://www.tapeciarnia.pl/tapety/normalne/4290_europa_gory_jezioro.jpg" alt="Jezioro 1" id="d1">
+            </div>
+            <div class="image-container">
+                <img src="https://www.worldisbeautiful.eu/up_files/2272-Mazurskie-krajobrazy.jpg" alt="Jezioro 2" id="d2">
+            </div>
+            <div class="image-container">
+                <img src="https://www.worldisbeautiful.eu/up_files/928_01-Jezioro-Mamry.jpg" alt="Jezioro 3" id="d3">
+            </div>
+            <div class="image-container">
+                <img src="https://live.staticflickr.com/1919/44903393161_ecabcaf465_b.jpg" alt="Jezioro 4" id="d4">
+            </div>
+            <div class="image-container">
+                <img src="https://live.staticflickr.com/1915/44903392941_67f7f6bc6b_b.jpg" alt="Jezioro 5" id="d5">
+            </div>
+        </div>
+
+        <div id="beaches" class="gallery">
+            <div class="image-container">
+                <img src="https://i.wpimg.pl/O/1920x1282/filerepo.grupawp.pl/api/v1/display/embed/d687476f-2618-4e44-8c6f-7ecc0e0dd0c8" alt="Plaza 1" id="e1">
+            </div>
+            <div class="image-container">
+                <img src="https://i0.wp.com/www.skarbyzpodrozy.pl/wp-content/uploads/2019/07/SilverMint-peljesac-wyjazd-z-dziecmi_4.jpg?resize=1290%2C968&ssl=1" alt="Plaza 2" id="e2">
+            </div>
+            <div class="image-container">
+                <img src="https://t4.ftcdn.net/jpg/02/60/36/45/360_F_260364535_MrlM5K59yDVHsYMEArA0ydO6SBbLnYTz.jpg" alt="Plaza 3" id="e3">
+            </div>
+            <div class="image-container">
+                <img src="https://www.wizjalokalna.pl/userfiles/image/279094362_534549314768022_3166437577795173898_n.jpg" alt="Plaza 4" id="e4">
+            </div>
+            <div class="image-container">
+                <img src="https://d-art.ppstatic.pl/kadry/k/r/7e/0a/6436b3d19d99c_o_full.jpg" alt="Plaza 5" id="e5">
+            </div>
+        </div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="navigation">
+<button id="prev-btn" onclick="prevImage()">Poprzedni</button>
+<button id="next-btn" onclick="nextImage()">Następny</button>
+<button id="first-btn" onclick="firstImage()">Pierwszy</button>
+<button id="last-btn" onclick="lastImage()">Ostatni</button>
+        </div>
+    </main>
+    <footer>
+        <p>Projekt strony internetowej wykonany w ramach zaliczenia przedmiotu MO: TIiSKwE na kierunku Energetyka. [Tomasz Rachmil]</p>
+    </footer>
+    <script src="js/gallery.js"></script>
+    <script src="js/global.js"></script>
+</body>
+</html>

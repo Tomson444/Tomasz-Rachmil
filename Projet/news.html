@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geografia Europy - Wiadomości</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/news.css">
+    <style>
+        .centered {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+ <style>
+    .centered {
+        text-align: center;
+        margin-top: 20px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+        width: 100%;
+        max-width: 250px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #0073e6;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #005bb5;
+    }
+    canvas {
+        border: 1px solid #000;
+        margin-top: 20px;
+        max-width: 100%;
+    }
+    footer {
+        text-align: center;
+        background-color: #333;
+        color: white;
+        position: relative;
+        bottom: auto;
+        width: 100%;
+        margin-top: auto;
+    }
+   
+</style>
+</head>
+<body>
+    <header>
+        <h1>Geografia Europy</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="about.html">Teren</a></li>
+                <li><a href="countries.html">Kraje</a></li>
+                <li><a href="maps.html">Mapa</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="gallery.html">Galeria</a></li>
+                <li><a href="resources.html">Surowce</a></li>
+                <li><a href="news.html">Widadomości</a></li>
+                <li><a href="events.html">Wydarzenia</a></li>
+                <li><a href="contact.html">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Wiadomości</h2>
+        <div class="centered">
+            <div id="clock"></div>
+            <div id="date"></div>
+            <div id="visit-counter"></div>
+            <div id="time-spent"></div>
+        </div>
+
+
+        <div class="container">
+            <h1>Strat Napięcia - Metoda Momentów</h1>
+            <p>ΔU<sub>AD</sub> = √3 × Z<sub>0</sub> × (I<sub>B</sub> × l<sub>BA</sub> + I<sub>C</sub> × l<sub>CA</sub> + I<sub>D</sub> × l<sub>DA</sub>)</p>
+            <div class="form-group">
+                <label for="z0">Z₀ (Impedancja):</label>
+                <input type="text" id="z0">
+            </div>
+            <div class="form-group">
+                <label for="iB">I_B (Prąd B):</label>
+                <input type="text" id="iB">
+            </div>
+            <div class="form-group">
+                <label for="lBA">l_BA (Długość BA):</label>
+                <input type="text" id="lBA">
+            </div>
+            <div class="form-group">
+                <label for="iC">I_C (Prąd C):</label>
+                <input type="text" id="iC">
+            </div>
+            <div class="form-group">
+                <label for="lCA">l_CA (Długość CA):</label>
+                <input type="text" id="lCA">
+            </div>
+            <div class="form-group">
+                <label for="iD">I_D (Prąd D):</label>
+                <input type="text" id="iD">
+            </div>
+            <div class="form-group">
+                <label for="lDA">l_DA (Długość DA):</label>
+                <input type="text" id="lDA">
+            </div>
+            <button onclick="calculateVoltageDrop()">Oblicz Strat Napięcia</button>
+            <p id="voltage-drop-result"></p>
+
+            <h1>Wykres Funkcji Kwadratowej</h1>
+            <div class="form-group">
+                <label for="a">a:</label>
+                <input type="text" id="a">
+            </div>
+            <div class="form-group">
+                <label for="b">b:</label>
+                <input type="text" id="b">
+            </div>
+            <div class="form-group">
+                <label for="c">c:</label>
+                <input type="text" id="c">
+            </div>
+            <button onclick="drawGraph()">Rysuj Wykres</button>
+            <canvas id="graphCanvas" width="600" height="400"></canvas>
+        </div>
+            
+
+    </main>
+    <footer>
+        <p>Projekt strony internetowej wykonany w ramach zaliczenia przedmiotu MO: TIiSKwE na kierunku Energetyka. [Tomasz Rachmil]</p>
+    </footer>
+    <script src="js/news.js"></script>
+    <script src="js/global.js"></script>
+</body>
+</html>
